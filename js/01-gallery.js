@@ -31,4 +31,13 @@ function onGalleryContainerClick(event) {
     `<img src="${event.target.dataset.source}">`
   );
   instance.show();
+
+  event.preventDefault();
+
+  window.addEventListener("keydown", onEscapeClose);
+  function onEscapeClose(event) {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  }
 }
