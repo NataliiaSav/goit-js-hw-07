@@ -28,13 +28,23 @@ function onGalleryContainerClick(event) {
     return;
   }
   const instance = basicLightbox.create(
-    `<img src="${event.target.dataset.source}">`
-  );
+    `<img src="${event.target.dataset.source}">`,
+    { onShow: (instance) => 
+      {document.addEventListener("keydown", onEscapeClose);},
+	/*
+	 * Function that gets executed before the lightbox closes.
+	 * Returning false will prevent the lightbox from closing.
+	 */
+	onClose: (instance) => {
+    document.removeEventListener("keydown", onEscapeClose);
+  }
+});
+
   instance.show();
 
   event.preventDefault();
 
-  window.addEventListener("keydown", onEscapeClose);
+  
   function onEscapeClose(event) {
     if (event.code === "Escape") {
       instance.close();
