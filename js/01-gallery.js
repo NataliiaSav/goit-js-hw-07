@@ -31,10 +31,7 @@ function onGalleryContainerClick(event) {
     `<img src="${event.target.dataset.source}">`,
     { onShow: (instance) => 
       {document.addEventListener("keydown", onEscapeClose);},
-	/*
-	 * Function that gets executed before the lightbox closes.
-	 * Returning false will prevent the lightbox from closing.
-	 */
+	
 	onClose: (instance) => {
     document.removeEventListener("keydown", onEscapeClose);
   }
@@ -43,7 +40,6 @@ function onGalleryContainerClick(event) {
   instance.show();
 
   event.preventDefault();
-
   
   function onEscapeClose(event) {
     if (event.code === "Escape") {
